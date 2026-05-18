@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IGNITE 2026</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  </head>
+
+  <body>
+    <div class="cursor-glow"></div>
+    <div class="glow glow1"></div>
+    <div class="glow glow2"></div>
+
+    <main class="container">
+      <h1>🔥 IGNITE 2026</h1>
+
+      <nav>
+        <button class="nav-btn active" onclick="openTab('home', this)">
+          Home
+        </button>
+        <button class="nav-btn" onclick="openTab('register', this)">
+          Register
+        </button>
+        <button class="nav-btn" onclick="openTab('arenas', this)">
+          Arenas
+        </button>
+        <button class="nav-btn" onclick="openTab('stay', this)">Stay</button>
+        <button class="nav-btn" onclick="openTab('idcard', this)">
+          ID Card
+        </button>
+      </nav>
+
+      <section id="home" class="tab active">
+        <span class="badge">INTER-COLLEGE FEST</span>
+        <h2>Spark The Future</h2>
+        <p>
+          IGNITE 2026 is an inter-college technical and cultural fest packed
+          with tech battles, cultural stages, gaming zones, literary events,
+          stay portal, and digital entry passes.
+        </p>
+
+        <div class="timer-box">
+          <p>BATTLES BEGIN IN</p>
+          <h3 id="timer">Loading...</h3>
+        </div>
+
+        <div class="stats">
+          <div>
+            <h3>₹2 Lakhs</h3>
+            <p>Prize Pool</p>
+          </div>
+          <div>
+            <h3>20+</h3>
+            <p>Events</p>
+          </div>
+          <div>
+            <h3>50+</h3>
+            <p>Colleges</p>
+          </div>
+        </div>
+
+        <div class="sponsor-box">
+          <h2>Our Sponsors</h2>
+          <div class="sponsors">
+            <div>Tech Partner</div>
+            <div>Food Partner</div>
+            <div>Media Partner</div>
+            <div>Merch Partner</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="register" class="tab">
+        <h2>Basic Registration</h2>
+        <p class="note">
+          Fill this once. Same details will auto-fill in event forms and ID
+          card.
+        </p>
+
+        <form id="basicForm">
+          <div class="input-box">
+            <label>Full Name</label>
+            <input
+              id="name"
+              type="text"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label>College Name</label>
+            <input
+              id="college"
+              type="text"
+              placeholder="Enter your college name"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label>Email Address</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Enter your email address"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label>Phone Number</label>
+            <input
+              id="phone"
+              type="tel"
+              placeholder="Enter your phone number"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label>Course / Branch</label>
+            <input
+              id="course"
+              type="text"
+              placeholder="Enter your course or branch"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label>Select Your Year</label>
+            <select id="year" required>
+              <option value="">Choose your year</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="input-box">
+            <label>City</label>
+            <input
+              id="city"
+              type="text"
+              placeholder="Enter your city"
+              required
+            />
+          </div>
+
+          <button type="submit">Save Registration</button>
+        </form>
+
+        <div id="savedBox" class="saved-box hidden"></div>
+      </section>
+
+      <section id="arenas" class="tab">
+        <h2>Event Arenas</h2>
+        <p class="note">
+          Click category, then choose event. Organized chaos, finally.
+        </p>
+
+        <div class="arena-wrapper">
+          <div class="side-tabs">
+            <button class="arena-btn active" onclick="openArena('tech', this)">
+              ⚡ Tech
+            </button>
+            <button class="arena-btn" onclick="openArena('cultural', this)">
+              🎭 Cultural
+            </button>
+            <button class="arena-btn" onclick="openArena('gaming', this)">
+              🎮 Gaming
+            </button>
+            <button class="arena-btn" onclick="openArena('literary', this)">
+              📚 Literary
+            </button>
+          </div>
+
+          <div class="arena-area">
+            <div id="tech" class="arena-section active"></div>
+            <div id="cultural" class="arena-section"></div>
+            <div id="gaming" class="arena-section"></div>
+            <div id="literary" class="arena-section"></div>
+          </div>
+        </div>
+
+        <div id="eventBox" class="event-box hidden">
+          <h2 id="eventTitle">Register for Event</h2>
+
+          <form id="eventForm">
+            <div class="input-box">
+              <label>Event Name</label>
+              <input id="eventName" readonly />
+            </div>
+
+            <div class="input-box">
+              <label>Participation Type</label>
+              <select id="type" onchange="toggleGroup()" required>
+                <option value="">Choose participation type</option>
+                <option>Individual</option>
+                <option>Group</option>
+              </select>
+            </div>
+
+            <div class="input-box">
+              <label>Participant Name</label>
+              <input
+                id="eventPerson"
+                placeholder="Enter participant name"
+                required
+              />
+            </div>
+
+            <div class="input-box">
+              <label>College Name</label>
+              <input
+                id="eventCollege"
+                placeholder="Enter college name"
+                required
+              />
+            </div>
+
+            <div class="input-box">
+              <label>Email Address</label>
+              <input
+                id="eventEmail"
+                placeholder="Enter email address"
+                required
+              />
+            </div>
+
+            <div class="input-box">
+              <label>Phone Number</label>
+              <input
+                id="eventPhone"
+                placeholder="Enter phone number"
+                required
+              />
+            </div>
+
+            <div id="groupBox" class="hidden">
+              <div class="input-box">
+                <label>Team Name</label>
+                <input placeholder="Enter team name" />
+              </div>
+
+              <div class="input-box">
+                <label>Number of Members</label>
+                <input
+                  type="number"
+                  placeholder="Enter number of members"
+                  min="2"
+                />
+              </div>
+
+              <div class="input-box">
+                <label>Member Names</label>
+                <textarea placeholder="Enter all member names"></textarea>
+              </div>
+            </div>
+
+            <button type="submit">Submit Event Registration</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="stay" class="tab">
+        <h2>Stay Portal</h2>
+        <p class="note">
+          Choose stay type and calculate estimated cost for your team.
+        </p>
+
+        <div class="price-cards">
+          <div>
+            <h3>Dormitory</h3>
+            <p>₹150 / night</p>
+          </div>
+          <div>
+            <h3>Shared Room</h3>
+            <p>₹300 / night</p>
+          </div>
+          <div>
+            <h3>Premium Room</h3>
+            <p>₹500 / night</p>
+          </div>
+        </div>
+
+        <form id="stayForm">
+          <div class="input-box">
+            <label>Contact Person Name</label>
+            <input
+              id="stayContactName"
+              placeholder="Enter contact person name"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label>College Name</label>
+            <input id="stayCollege" placeholder="Enter college name" required />
+          </div>
+
+          <div class="input-box">
+            <label>Contact Phone Number</label>
+            <input
+              id="stayPhone"
+              placeholder="Enter contact phone number"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label>Total Number of Students</label>
+            <input
+              id="students"
+              type="number"
+              min="1"
+              placeholder="Enter total number of students"
+              required
+              oninput="calculateCost()"
+            />
+          </div>
+
+          <div class="input-box">
+            <label>Group Type</label>
+            <select id="groupType" required>
+              <option value="">Choose group type</option>
+              <option>Girls Group</option>
+              <option>Boys Group</option>
+              <option>Mixed Group</option>
+            </select>
+          </div>
+
+          <div class="input-box">
+            <label>Arrival Date</label>
+            <input
+              id="arrival"
+              type="date"
+              required
+              onchange="calculateCost()"
+            />
+          </div>
+
+          <div class="input-box">
+            <label>Departure Date</label>
+            <input
+              id="departure"
+              type="date"
+              required
+              onchange="calculateCost()"
+            />
+          </div>
+
+          <div class="input-box">
+            <label>Select Stay Type</label>
+            <select id="room" required onchange="calculateCost()">
+              <option value="">Choose stay type</option>
+              <option value="150">Dormitory - ₹150/night</option>
+              <option value="300">Shared Room - ₹300/night</option>
+              <option value="500">Premium Room - ₹500/night</option>
+            </select>
+          </div>
+
+          <div class="input-box">
+            <label>Special Request</label>
+            <textarea
+              placeholder="Enter room allotment notes or special requests"
+            ></textarea>
+          </div>
+
+          <div class="cost-box">
+            Estimated Stay Cost: <span id="cost">₹0</span>
+          </div>
+
+          <button type="submit">Request Stay</button>
+        </form>
+      </section>
+
+      <section id="idcard" class="tab">
+        <h2>Digital ID Card</h2>
+        <p class="note">
+          Generate your ticket-style pass after basic registration.
+        </p>
+
+        <button onclick="makeID()">Generate ID Card</button>
+
+        <div id="card" class="id-card hidden">
+          <div class="strip">IGNITE 2026</div>
+
+          <div class="card-left">
+            <p class="small">DIGITAL ENTRY PASS</p>
+            <h2>🔥 IGNITE 2026</h2>
+
+            <p>Name</p>
+            <h3 id="cardName"></h3>
+
+            <p>College</p>
+            <h3 id="cardCollege"></h3>
+
+            <p id="cardEmail"></p>
+            <p id="cardPhone"></p>
+
+            <h4 id="cardId"></h4>
+          </div>
+
+          <div class="card-right">
+            <div id="qrcode"></div>
+            <p>Scan for Entry</p>
+          </div>
+        </div>
+
+        <button class="print-btn" onclick="window.print()">
+          Print ID Card
+        </button>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
