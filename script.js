@@ -206,14 +206,16 @@ document
 
 // 13. COUNTDOWN TIMER
 function startTimer() {
-  const festDate = new Date("June 15, 2026 09:00:00").getTime();
+  // Set your fest date here
+  const festDate = new Date("2026-09-15T09:00:00").getTime();
 
-  setInterval(function () {
+  const timer = setInterval(function () {
     const currentDate = new Date().getTime();
     const timeLeft = festDate - currentDate;
 
     if (timeLeft <= 0) {
-      document.getElementById("timer").innerText = "Fest Started!";
+      document.getElementById("timer").innerText = "🎉 Fest Started!";
+      clearInterval(timer);
       return;
     }
 
@@ -226,6 +228,9 @@ function startTimer() {
       `${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
   }, 1000);
 }
+
+// Start the timer
+startTimer();
 
 // 14. DIGITAL ID CARD + QR CODE
 function makeID() {
